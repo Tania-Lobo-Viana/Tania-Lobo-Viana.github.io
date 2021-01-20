@@ -4,8 +4,33 @@
 		<title> Horários agendados - Laboratório de Bioinformática </title>
 		<link type="text/css" rel="stylesheet" href="estilo.css">
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-		<script type="text/javascript" src="script.js"></script>
+		
+ <script>
  
+	$(function () {
+    $("td, th").dblclick(function () {
+        var conteudoOriginal = $(this).text();
+
+        $(this).addClass("celulaEmEdicao");
+        $(this).html("<input type='text' value='" + conteudoOriginal + "' />");
+        $(this).children().first().focus();
+
+        $(this).children().first().keypress(function (e) {
+            if (e.which == 13) {
+                var novoConteudo = $(this).val();
+                $(this).parent().text(novoConteudo);
+                $(this).parent().removeClass("celulaEmEdicao");
+            }
+        });
+
+	$(this).children().first().blur(function(){
+		$(this).parent().text(conteudoOriginal);
+		$(this).parent().removeClass("celulaEmEdicao");
+	});
+    });
+});
+
+</script>
 	</head>
 
 	<body>
